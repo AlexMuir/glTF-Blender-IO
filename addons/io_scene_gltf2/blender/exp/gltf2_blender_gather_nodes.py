@@ -75,6 +75,10 @@ def __filter_node(blender_object, export_settings):
     else:
         if export_settings[gltf2_blender_export_keys.SELECTED] and blender_object.select_get() is False:
             return False
+        if export_settings[gltf2_blender_export_keys.ACTIVE_COLLECTION]:
+            ctx_collection = bpy.context.view_layer.active_layer_collection.collection
+            if not blender_object in list(ctx_collection.all_objects):
+                return False
     if not export_settings[gltf2_blender_export_keys.LAYERS] and not blender_object.layers[0]:
         return False
     if bpy.app.version < (2, 80, 0):

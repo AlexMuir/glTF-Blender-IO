@@ -135,6 +135,12 @@ class ExportGLTF2_Base:
         default=False
     )
 
+    export_active_collection = BoolProperty(
+        name='Active collection',
+        description='Exports active collection only (and its children)',
+        default=False
+    )
+
     # export_layers = BoolProperty(
     #     name='All layers',
     #     description='Export all layers, rather than just the first',
@@ -313,6 +319,7 @@ class ExportGLTF2_Base:
         export_settings['gltf_colors'] = self.export_colors
         export_settings['gltf_cameras'] = self.export_cameras
         export_settings['gltf_selected'] = self.export_selected
+        export_settings['gltf_active_collection'] = self.export_active_collection
         export_settings['gltf_layers'] = True #self.export_layers
         export_settings['gltf_extras'] = self.export_extras
         export_settings['gltf_yup'] = self.export_yup
@@ -372,6 +379,7 @@ class ExportGLTF2_Base:
         col = self.layout.box().column()
         col.prop(self, 'export_format')
         col.prop(self, 'export_selected')
+        col.prop(self, 'export_active_collection')
         col.prop(self, 'export_apply')
         col.prop(self, 'export_yup')
         col.prop(self, 'export_extras')
